@@ -1,9 +1,15 @@
 import unittest
-from app import app
+from app import app, items  # Import `items` so we can modify it in tests
 
 class FlaskAppTestCase(unittest.TestCase):
 
     def setUp(self):
+        # Reset the `items` list to its original state before each test
+        items.clear()
+        items.extend([
+            {"id": 1, "name": "Item 1"},
+            {"id": 2, "name": "Item 2"},
+        ])
         self.app = app.test_client()
         self.app.testing = True
 
